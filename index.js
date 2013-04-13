@@ -37,7 +37,9 @@ Streamify.prototype.write = function (doc) {
   return true
 }
 
-Streamify.prototype.end = function () {
+Streamify.prototype.end = function (doc) {
+  if (doc) this.write(doc);
+
   this.emit('data', '\n\n]' + (this.finishingString || ''))
 
   this.emit('end')

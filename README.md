@@ -73,9 +73,11 @@ will yield something like:
 ]}
 ```
 
-### streamify.pipe()
+### .write(doc)
 
-`streamify` should only be used as an intermediary stream as in the example.
+### .end([doc])
+
+### .pipe()
 
 ### License
 
