@@ -1,8 +1,5 @@
 # JSON Array Stream [![Build Status](https://travis-ci.org/jonathanong/json-array-stream.png)](https://travis-ci.org/jonathanong/json-array-stream)
 
-This is meant to stream an array of documents as JSON.
-The idea is that a simple `[]` is returned without any metadata and the total number of documents is unknown until the very end.
-
 ## Example
 
 The main use case for this is to stream a MongoDB query to a web client.
@@ -22,7 +19,7 @@ app.get('/things', function (req, res, next) {
 
 will yield something like
 
-```js
+```json
 [
 
 {_id:"123412341234123412341234"}
@@ -64,7 +61,7 @@ app.get('/things', function (req, res, next) {
 
 will yield something like:
 
-```js
+```json
 {"collection":"things", "things":[
 
 {_id:"123412341234123412341234"}
