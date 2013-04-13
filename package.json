@@ -1,0 +1,8 @@
+{
+  "name": "json-array-stream",
+  "description": "Stream a document array as JSON",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "node test"
+  }
+}
