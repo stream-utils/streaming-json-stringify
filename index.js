@@ -19,6 +19,8 @@ function Streamify(finishingString) {
   this.writable = true
 }
 
+Streamify.prototype.writable = true
+
 Streamify.prototype.write = function (doc) {
   var str
   if (this._started) {
@@ -40,7 +42,17 @@ Streamify.prototype.write = function (doc) {
 Streamify.prototype.end = function (doc) {
   if (doc) this.write(doc);
 
+  if (!this._started) this.emit('data', '[\n\n');
+
   this.emit('data', '\n\n]' + (this.finishingString || ''))
 
   this.emit('end')
+
+  this.writable = false
+}
+
+Streamify.prototype.destroy = function () {
+  this.emit('close')
+
+  this.writable = false
 }

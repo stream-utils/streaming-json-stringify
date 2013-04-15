@@ -52,3 +52,20 @@ var streamify = require('./')
     })
   })();
 })();
+
+;(function () {
+  var chunk = ''
+  var stream = streamify()
+
+  stream.on('data', function (str) {
+    chunk += str
+  })
+
+  stream.on('end', function () {
+    assert.equal(chunk, '[\n\n\n\n]')
+
+    console.log('Empty stream works!')
+  })
+
+  stream.end()
+})();
