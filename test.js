@@ -6,7 +6,7 @@ var streamify = require('./')
 ;(function () {
   var chunk = ''
   var readStream = new Stream()
-  var writeStream = streamify('a')
+  var writeStream = streamify()
 
   readStream.pipe(writeStream)
 
@@ -33,7 +33,7 @@ var streamify = require('./')
       + '{}'
       + '\n\n,\n\n'
       + '{}'
-      + '\n\n]a'
+      + '\n\n]'
     )
 
     console.log('All checks out!')

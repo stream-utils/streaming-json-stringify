@@ -4,24 +4,13 @@
 
 */
 
-var Stream = require('stream').Stream
-var util = require('util')
+var Through = require('through')
 
-util.inherits(Streamify, Stream)
-
-module.exports = Streamify
-
-function Streamify(finishingString) {
-  if (!(this instanceof Streamify))
-    return new Streamify(finishingString);
-
-  this.finishingString = finishingString
-  this.writable = true
+module.exports = function Streamify() {
+  return new Through(write, end)
 }
 
-Streamify.prototype.writable = true
-
-Streamify.prototype.write = function (doc) {
+function write(doc) {
   var str
   if (this._started) {
     str = '\n\n,\n\n'
@@ -35,24 +24,13 @@ Streamify.prototype.write = function (doc) {
   } catch (err) {
     this.emit('error', err)
   }
-
-  return true
 }
 
-Streamify.prototype.end = function (doc) {
+function end(doc) {
   if (doc) this.write(doc);
-
   if (!this._started) this.emit('data', '[\n\n');
 
-  this.emit('data', '\n\n]' + (this.finishingString || ''))
+  this.emit('data', '\n\n]')
 
   this.emit('end')
-
-  this.writable = false
-}
-
-Streamify.prototype.destroy = function () {
-  this.emit('close')
-
-  this.writable = false
 }
