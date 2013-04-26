@@ -23,17 +23,17 @@ var streamify = require('./')
   })
 
   writeStream.on('end', function () {
-    assert.equal(chunk, '[\n\n'
+    assert.equal(chunk, '[\n'
       + '{}'
-      + '\n\n,\n\n'
+      + '\n,\n'
       + '{}'
-      + '\n\n,\n\n'
+      + '\n,\n'
       + '{}'
-      + '\n\n,\n\n'
+      + '\n,\n'
       + '{}'
-      + '\n\n,\n\n'
+      + '\n,\n'
       + '{}'
-      + '\n\n]'
+      + '\n]'
     )
 
     console.log('All checks out!')
@@ -62,7 +62,7 @@ var streamify = require('./')
   })
 
   stream.on('end', function () {
-    assert.equal(chunk, '[\n\n\n\n]')
+    assert.equal(chunk, '[\n\n]')
 
     console.log('Empty stream works!')
   })

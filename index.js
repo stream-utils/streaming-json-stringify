@@ -7,16 +7,16 @@
 var Through = require('through')
 
 module.exports = function Streamify() {
-  return new Through(write, end)
+  return Through(write, end)
 }
 
 function write(doc) {
   var str
   if (this._started) {
-    str = '\n\n,\n\n'
+    str = '\n,\n'
   } else {
     this._started = true
-    str = '[\n\n'
+    str = '[\n'
   }
 
   try {
@@ -28,9 +28,9 @@ function write(doc) {
 
 function end(doc) {
   if (doc) this.write(doc);
-  if (!this._started) this.emit('data', '[\n\n');
+  if (!this._started) this.emit('data', '[\n');
 
-  this.emit('data', '\n\n]')
+  this.emit('data', '\n]')
 
   this.emit('end')
 }
