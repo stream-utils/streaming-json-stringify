@@ -7,5 +7,20 @@
   },
   "scripts": {
     "test": "node test"
-  }
+  },
+  "author": {
+    "name": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "twitter": "https://twitter.com/jongleberry"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathanong/json-array-stream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonathanong/json-array-stream/issues",
+    "email": "me@jongleberry.com"
+  },
+  "license": "WTFPL"
 }
