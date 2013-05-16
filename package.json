@@ -1,7 +1,7 @@
 {
   "name": "json-array-stream",
   "description": "Stream a document array as JSON",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "through": "~2.3.1"
   },
