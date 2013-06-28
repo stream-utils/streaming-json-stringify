@@ -1,5 +1,7 @@
 # JSON Array Stream [![Build Status](https://travis-ci.org/jonathanong/json-array-stream.png)](https://travis-ci.org/jonathanong/json-array-stream)
 
+Deprecated in favor of [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close).
+
 ## Example
 
 The main use case for this is to stream a MongoDB query to a web client. This is to be used only with streaming arrays, not objects.
