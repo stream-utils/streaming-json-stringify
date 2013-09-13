@@ -1,6 +1,7 @@
 # JSON Array Stream [![Build Status](https://travis-ci.org/jonathanong/json-array-stream.png)](https://travis-ci.org/jonathanong/json-array-stream)
 
-Deprecated in favor of [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close).
+`JSON.stringify([])` in streaming form.
+Similar to [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close) except it is, by default, a binary stream, and it is a streams2 implementation.
 
 ## Example
 
@@ -27,19 +28,21 @@ will yield something like
 ,
 {"_id":"123412341234123412341234"}
 ]
+
 ```
 
 ## Separators
 
 * The stream always starts with `'[\n'`.
 * Documents are separated by `'\n,\n'`.
-* The stream is terminated with `'\n]'`.
+* The stream is terminated with `'\n]\n'`.
 
 ## API
 
-### streamify()
+### streamify([options])
 
-Returns a duplex stream.
+Returns a `Transform` stream.
+The options are passed to the `Transform` constructor.
 
 ### License
 

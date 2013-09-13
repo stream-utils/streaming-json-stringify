@@ -1,71 +1,83 @@
 var assert = require('assert')
-var Stream = require('stream').Stream
+var PassThrough = require('stream').PassThrough
+var cat = require('cat-stream')
 
 var streamify = require('./')
 
-;(function () {
-  var chunk = ''
-  var readStream = new Stream()
-  var writeStream = streamify()
-
-  readStream.pipe(writeStream)
-
-  readStream.on('error', function (err) {
-    throw err
-  })
-
-  writeStream.on('error', function (err) {
-    throw err
-  })
-
-  writeStream.on('data', function (data) {
-    chunk += data
-  })
-
-  writeStream.on('end', function () {
-    assert.equal(chunk, '[\n'
-      + '{}'
-      + '\n,\n'
-      + '{}'
-      + '\n,\n'
-      + '{}'
-      + '\n,\n'
-      + '{}'
-      + '\n,\n'
-      + '{}'
-      + '\n]'
-    )
-
-    console.log('All checks out!')
-  })
-
-  var docs = 0
-
-  ;(function write() {
-    setImmediate(function () {
-      if (docs++ < 5) {
-        writeStream.write({})
-        write()
-      } else {
-        readStream.emit('end')
-      }
+describe('Streamify()', function () {
+  it('should work with an empty stream', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
     })
-  })();
-})();
 
-;(function () {
-  var chunk = ''
-  var stream = streamify()
+    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+      assert.ifError(err)
+      assert.equal(buf.toString('utf8'), '[\n\n]\n')
+      done()
+    }))
 
-  stream.on('data', function (str) {
-    chunk += str
+    stream.end()
   })
 
-  stream.on('end', function () {
-    assert.equal(chunk, '[\n\n]')
+  it('should work with a stream of length 1', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
 
-    console.log('Empty stream works!')
+    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+      assert.ifError(err)
+      assert.equal(buf.toString('utf8'), '[\n{}\n]\n')
+      done()
+    }))
+
+    stream.write({})
+    stream.end()
   })
 
-  stream.end()
-})();
+  it('should work with a stream of length 2', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+      assert.ifError(err)
+      assert.equal(buf.toString('utf8'), '[\n{}\n,\n{}\n]\n')
+      done()
+    }))
+
+    stream.write({})
+    stream.write({})
+    stream.end()
+  })
+
+  it('should work with non-objects', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+      assert.ifError(err)
+      assert.equal(buf.toString('utf8'), '[\n"hello"\n]\n')
+      done()
+    }))
+
+    stream.write('hello')
+    stream.end()
+  })
+
+  it('should return a string if encoding: "utf8"', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    stream.pipe(streamify({
+      encoding: 'utf8'
+    })).once('data', function (chunk) {
+      assert.equal(typeof chunk, 'string')
+      done()
+    })
+
+    stream.write({})
+    stream.end()
+  })
+})

@@ -1,12 +1,13 @@
 {
   "name": "json-array-stream",
-  "description": "Stream a document array as JSON",
-  "version": "0.0.3",
-  "dependencies": {
-    "through": "~2.3.1"
-  },
+  "description": "Streaming JSON.stringify() that returns an array",
+  "version": "0.1.0",
   "scripts": {
-    "test": "node test"
+    "test": "make test"
+  },
+  "devDependencies": {
+    "mocha": "~1.12",
+    "cat-stream": "*"
   },
   "author": {
     "name": "Jonathan Ong",
@@ -22,5 +23,8 @@
     "url": "https://github.com/jonathanong/json-array-stream/issues",
     "email": "me@jongleberry.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  }
 }

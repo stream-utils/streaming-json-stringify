@@ -3,34 +3,65 @@
   db.collection.find().stream().pipe(Streamify()).pipe(res)
 
 */
+var Transform = require('stream').Transform
+var util = require('util')
 
-var Through = require('through')
+util.inherits(Streamify, Transform)
 
-module.exports = function Streamify() {
-  return Through(write, end)
+module.exports = Streamify
+
+function Streamify(options) {
+  if (!(this instanceof Streamify))
+    return new Streamify(options || {})
+
+  options = options || {}
+  options.objectMode = true
+  Transform.call(this, options)
 }
 
-function write(doc) {
-  var str
-  if (this._started) {
-    str = '\n,\n'
+Streamify.prototype.destroyed = false
+Streamify.prototype.started = false
+Streamify.prototype.open = new Buffer('[\n', 'utf8')
+Streamify.prototype.seperator = new Buffer('\n,\n', 'utf8')
+Streamify.prototype.close = new Buffer('\n]\n', 'utf8')
+
+Streamify.prototype._transform = function (doc, encoding, cb) {
+  if (this.destroyed)
+    return
+
+  if (this.started) {
+    this.push(this.seperator)
   } else {
-    this._started = true
-    str = '[\n'
+    this.push(this.open)
+    this.started = true
   }
 
   try {
-    this.emit('data', str + JSON.stringify(doc))
+    doc = JSON.stringify(doc)
   } catch (err) {
-    this.emit('error', err)
+    cb(err)
+    return
   }
+
+  this.push(new Buffer(doc, 'utf8'))
+  cb()
 }
 
-function end(doc) {
-  if (doc) this.write(doc);
-  if (!this._started) this.emit('data', '[\n');
+Streamify.prototype._flush = function (cb) {
+  if (this.destroyed)
+    return
 
-  this.emit('data', '\n]')
+  if (!this.started)
+    this.push(this.open)
 
-  this.emit('end')
+  this.push(this.close)
+  this.push(null)
+  cb()
+}
+
+Streamify.prototype.destroy = function () {
+  if (!this.destroyed) {
+    this.emit('close')
+    this.destroyed = true
+  }
 }
