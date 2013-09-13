@@ -44,7 +44,7 @@ will yield something like
 Returns a `Transform` stream.
 The options are passed to the `Transform` constructor.
 
-### License
+## License
 
 The MIT License (MIT)
 
