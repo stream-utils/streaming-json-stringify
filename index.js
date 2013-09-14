@@ -39,12 +39,14 @@ Streamify.prototype._transform = function (doc, encoding, cb) {
   try {
     doc = JSON.stringify(doc)
   } catch (err) {
-    cb(err)
+    process.nextTick(function () {
+      cb(err)
+    })
     return
   }
 
   this.push(new Buffer(doc, 'utf8'))
-  cb()
+  process.nextTick(cb)
 }
 
 Streamify.prototype._flush = function (cb) {
@@ -56,7 +58,7 @@ Streamify.prototype._flush = function (cb) {
 
   this.push(this.close)
   this.push(null)
-  cb()
+  process.nextTick(cb)
 }
 
 Streamify.prototype.destroy = function () {
