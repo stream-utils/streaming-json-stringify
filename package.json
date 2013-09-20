@@ -1,12 +1,12 @@
 {
-  "name": "json-array-stream",
-  "description": "Streaming JSON.stringify() that returns an array",
-  "version": "0.1.2",
+  "name": "streaming-json-stringify",
+  "description": "Streaming JSON.stringify()",
+  "version": "0.1.0",
   "scripts": {
     "test": "make test"
   },
   "devDependencies": {
-    "mocha": "~1.12",
+    "mocha": "*",
     "cat-stream": "*"
   },
   "author": {
@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonathanong/json-array-stream.git"
+    "url": "https://github.com/jonathanong/streaming-json-stringify.git"
   },
   "bugs": {
-    "url": "https://github.com/jonathanong/json-array-stream/issues",
+    "url": "https://github.com/jonathanong/streaming-json-stringify/issues",
     "email": "me@jongleberry.com"
   },
   "license": "MIT",

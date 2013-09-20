@@ -1,6 +1,5 @@
-# JSON Array Stream [![Build Status](https://travis-ci.org/jonathanong/json-array-stream.png)](https://travis-ci.org/jonathanong/json-array-stream)
+# Streaming `JSON.stringify([])` [![Build Status](https://travis-ci.org/jonathanong/streaming-json-stringify.png)](https://travis-ci.org/jonathanong/streaming-json-stringify)
 
-Streaming `JSON.stringify([])`.
 Similar to [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close) except it is, by default, a binary stream, and it is a streams2 implementation.
 
 ## Example
