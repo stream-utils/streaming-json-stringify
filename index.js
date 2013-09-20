@@ -1,18 +1,18 @@
 /*
 
-  db.collection.find().stream().pipe(Streamify()).pipe(res)
+  db.collection.find().stream().pipe(Stringify()).pipe(res)
 
 */
 var Transform = require('stream').Transform
 var util = require('util')
 
-util.inherits(Streamify, Transform)
+util.inherits(Stringify, Transform)
 
-module.exports = Streamify
+module.exports = Stringify
 
-function Streamify(options) {
-  if (!(this instanceof Streamify))
-    return new Streamify(options || {})
+function Stringify(options) {
+  if (!(this instanceof Stringify))
+    return new Stringify(options || {})
 
   options = options || {}
   options.objectMode = true
@@ -20,19 +20,19 @@ function Streamify(options) {
 }
 
 // Flags
-Streamify.prototype.destroyed = false
-Streamify.prototype.started = false
+Stringify.prototype.destroyed = false
+Stringify.prototype.started = false
 
 // Array delimiters
-Streamify.prototype.open = new Buffer('[\n', 'utf8')
-Streamify.prototype.seperator = new Buffer('\n,\n', 'utf8')
-Streamify.prototype.close = new Buffer('\n]\n', 'utf8')
+Stringify.prototype.open = new Buffer('[\n', 'utf8')
+Stringify.prototype.seperator = new Buffer('\n,\n', 'utf8')
+Stringify.prototype.close = new Buffer('\n]\n', 'utf8')
 
 // JSON.stringify options
-Streamify.prototype.replacer = null
-Streamify.prototype.space = 0
+Stringify.prototype.replacer = null
+Stringify.prototype.space = 0
 
-Streamify.prototype._transform = function (doc, encoding, cb) {
+Stringify.prototype._transform = function (doc, encoding, cb) {
   if (this.destroyed)
     return
 
@@ -56,7 +56,7 @@ Streamify.prototype._transform = function (doc, encoding, cb) {
   process.nextTick(cb)
 }
 
-Streamify.prototype._flush = function (cb) {
+Stringify.prototype._flush = function (cb) {
   if (this.destroyed)
     return
 
@@ -68,7 +68,7 @@ Streamify.prototype._flush = function (cb) {
   process.nextTick(cb)
 }
 
-Streamify.prototype.destroy = function () {
+Stringify.prototype.destroy = function () {
   if (!this.destroyed) {
     this.emit('close')
     this.destroyed = true

@@ -2,7 +2,7 @@ var assert = require('assert')
 var PassThrough = require('stream').PassThrough
 var cat = require('cat-stream')
 
-var streamify = require('./')
+var Stringify = require('./')
 
 describe('Streamify()', function () {
   it('should work with an empty stream', function (done) {
@@ -10,7 +10,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+    stream.pipe(Stringify()).pipe(cat(function (err, buf) {
       assert.ifError(err)
       assert.equal(buf.toString('utf8'), '[\n\n]\n')
       done()
@@ -24,7 +24,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+    stream.pipe(Stringify()).pipe(cat(function (err, buf) {
       assert.ifError(err)
       assert.equal(buf.toString('utf8'), '[\n{}\n]\n')
       done()
@@ -39,7 +39,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+    stream.pipe(Stringify()).pipe(cat(function (err, buf) {
       assert.ifError(err)
       assert.equal(buf.toString('utf8'), '[\n{}\n,\n{}\n]\n')
       done()
@@ -55,7 +55,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    stream.pipe(streamify()).pipe(cat(function (err, buf) {
+    stream.pipe(Stringify()).pipe(cat(function (err, buf) {
       assert.ifError(err)
       assert.equal(buf.toString('utf8'), '[\n"hello"\n]\n')
       done()
@@ -70,7 +70,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    stream.pipe(streamify({
+    stream.pipe(Stringify({
       encoding: 'utf8'
     })).once('data', function (chunk) {
       assert.equal(typeof chunk, 'string')
@@ -86,7 +86,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    var stringify = streamify()
+    var stringify = Stringify()
     stringify.space = 2
 
     var obj = {
