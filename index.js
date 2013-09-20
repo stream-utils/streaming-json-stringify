@@ -32,7 +32,7 @@ Stringify.prototype.close = new Buffer('\n]\n', 'utf8')
 Stringify.prototype.replacer = null
 Stringify.prototype.space = 0
 
-Stringify.prototype._transform = function (doc, encoding, cb) {
+Stringify.prototype._transform = function (doc, enc, cb) {
   if (this.destroyed)
     return
 

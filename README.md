@@ -1,21 +1,22 @@
 # JSON Array Stream [![Build Status](https://travis-ci.org/jonathanong/json-array-stream.png)](https://travis-ci.org/jonathanong/json-array-stream)
 
-`JSON.stringify([])` in streaming form.
+Streaming `JSON.stringify([])`.
 Similar to [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close) except it is, by default, a binary stream, and it is a streams2 implementation.
 
 ## Example
 
-The main use case for this is to stream a MongoDB query to a web client. This is to be used only with streaming arrays, not objects.
+The main use case for this is to stream a database query to a web client.
+This is meant to be used only with arrays, not objects.
 
 ```js
-var streamify = require('json-array-stream')
+var Stringify = require('json-array-stream')
 
 app.get('/things', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
 
   db.things.find()
   .stream()
-  .pipe(streamify())
+  .pipe(Stringify())
   .pipe(res)
 })
 ```
@@ -39,10 +40,20 @@ will yield something like
 
 ## API
 
-### streamify([options])
+### Stringify([options])
 
 Returns a `Transform` stream.
 The options are passed to the `Transform` constructor.
+
+### JSON.stringify options
+
+You can override these:
+
+```js
+var stringify = Stringify()
+stringify.replacer = function () {}
+stringify.space = 2
+```
 
 ## License
 
