@@ -14,9 +14,8 @@ function Stringify(options) {
   if (!(this instanceof Stringify))
     return new Stringify(options || {})
 
-  options = options || {}
-  options.objectMode = true
-  Transform.call(this, options)
+  Transform.call(this, options || {})
+  this._writableState.objectMode = true
 }
 
 // Flags
