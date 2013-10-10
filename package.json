@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonathanong/streaming-json-stringify.git"
+    "url": "https://github.com/stream-utils/streaming-json-stringify.git"
   },
   "bugs": {
-    "url": "https://github.com/jonathanong/streaming-json-stringify/issues",
+    "url": "https://github.com/stream-utils/streaming-json-stringify/issues",
     "email": "me@jongleberry.com"
   },
   "license": "MIT",
