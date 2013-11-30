@@ -45,14 +45,12 @@ Stringify.prototype._transform = function (doc, enc, cb) {
   try {
     doc = JSON.stringify(doc, this.replacer, this.space)
   } catch (err) {
-    process.nextTick(function () {
-      cb(err)
-    })
+    cb(err)
     return
   }
 
   this.push(new Buffer(doc, 'utf8'))
-  process.nextTick(cb)
+  cb()
 }
 
 Stringify.prototype._flush = function (cb) {
@@ -64,7 +62,7 @@ Stringify.prototype._flush = function (cb) {
 
   this.push(this.close)
   this.push(null)
-  process.nextTick(cb)
+  cb()
 }
 
 Stringify.prototype.destroy = function () {
