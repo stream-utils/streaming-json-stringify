@@ -8,7 +8,7 @@ The main use case for this is to stream a database query to a web client.
 This is meant to be used only with arrays, not objects.
 
 ```js
-var Stringify = require('json-array-stream')
+var Stringify = require('streaming-json-stringify')
 
 app.get('/things', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
