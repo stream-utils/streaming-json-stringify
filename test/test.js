@@ -2,7 +2,7 @@ var assert = require('assert')
 var PassThrough = require('stream').PassThrough
 var cat = require('cat-stream')
 
-var Stringify = require('./')
+var Stringify = require('..')
 
 describe('Streamify()', function () {
   it('should work with an empty stream', function (done) {

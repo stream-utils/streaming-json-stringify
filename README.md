@@ -1,4 +1,12 @@
-# Streaming JSON.stringify() [![Build Status](https://travis-ci.org/stream-utils/streaming-json-stringify.png)](https://travis-ci.org/stream-utils/streaming-json-stringify)
+# Streaming JSON.stringify()
+
+[![NPM version][npm-image]][npm-url]
+[![Build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Dependency Status][david-image]][david-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
+[![Gittip][gittip-image]][gittip-url]
 
 Similar to [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close) except it is, by default, a binary stream, and it is a streams2 implementation.
 
@@ -54,26 +62,21 @@ stringify.replacer = function () {}
 stringify.space = 2
 ```
 
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2013 Jonathan Ong me@jongleberry.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+[gitter-image]: https://badges.gitter.im/stream-utils/streaming-json-stringify.png
+[gitter-url]: https://gitter.im/stream-utils/streaming-json-stringify
+[npm-image]: https://img.shields.io/npm/v/streaming-json-stringify.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/streaming-json-stringify
+[github-tag]: http://img.shields.io/github/tag/stream-utils/streaming-json-stringify.svg?style=flat-square
+[github-url]: https://github.com/stream-utils/streaming-json-stringify/tags
+[travis-image]: https://img.shields.io/travis/stream-utils/streaming-json-stringify.svg?style=flat-square
+[travis-url]: https://travis-ci.org/stream-utils/streaming-json-stringify
+[coveralls-image]: https://img.shields.io/coveralls/stream-utils/streaming-json-stringify.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/stream-utils/streaming-json-stringify
+[david-image]: http://img.shields.io/david/stream-utils/streaming-json-stringify.svg?style=flat-square
+[david-url]: https://david-dm.org/stream-utils/streaming-json-stringify
+[license-image]: http://img.shields.io/npm/l/streaming-json-stringify.svg?style=flat-square
+[license-url]: LICENSE
+[downloads-image]: http://img.shields.io/npm/dm/streaming-json-stringify.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/streaming-json-stringify
+[gittip-image]: https://img.shields.io/gratipay/jonathanong.svg?style=flat-square
+[gittip-url]: https://gratipay.com/jonathanong/
