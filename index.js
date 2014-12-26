@@ -5,8 +5,8 @@
 
 */
 
+var Transform = require('readable-stream/transform')
 var stringify = require('json-stringify-safe')
-var Transform = require('stream').Transform
 var util = require('util')
 
 util.inherits(Stringify, Transform)

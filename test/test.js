@@ -1,5 +1,6 @@
+
+var PassThrough = require('readable-stream/passthrough')
 var assert = require('assert')
-var PassThrough = require('stream').PassThrough
 var cat = require('cat-stream')
 
 var Stringify = require('..')

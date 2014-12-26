@@ -24,6 +24,7 @@
     "index.js"
   ],
   "dependencies": {
-    "json-stringify-safe": "5"
+    "json-stringify-safe": "5",
+    "readable-stream": "1"
   }
 }
