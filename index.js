@@ -1,8 +1,11 @@
+
 /*
 
   db.collection.find().stream().pipe(Stringify()).pipe(res)
 
 */
+
+var stringify = require('json-stringify-safe')
 var Transform = require('stream').Transform
 var util = require('util')
 
@@ -43,7 +46,7 @@ Stringify.prototype._transform = function (doc, enc, cb) {
   }
 
   try {
-    doc = JSON.stringify(doc, this.replacer, this.space)
+    doc = stringify(doc, this.replacer, this.space)
   } catch (err) {
     cb(err)
     return

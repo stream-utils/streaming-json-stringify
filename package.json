@@ -22,5 +22,8 @@
   ],
   "files": [
     "index.js"
-  ]
+  ],
+  "dependencies": {
+    "json-stringify-safe": "5"
+  }
 }
