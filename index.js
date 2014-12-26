@@ -22,7 +22,6 @@ function Stringify(options) {
 }
 
 // Flags
-Stringify.prototype.destroyed = false
 Stringify.prototype.started = false
 
 // Array delimiters
@@ -35,9 +34,6 @@ Stringify.prototype.replacer = null
 Stringify.prototype.space = 0
 
 Stringify.prototype._transform = function (doc, enc, cb) {
-  if (this.destroyed)
-    return
-
   if (this.started) {
     this.push(this.seperator)
   } else {
@@ -45,32 +41,15 @@ Stringify.prototype._transform = function (doc, enc, cb) {
     this.started = true
   }
 
-  try {
-    doc = stringify(doc, this.replacer, this.space)
-  } catch (err) {
-    cb(err)
-    return
-  }
+  doc = stringify(doc, this.replacer, this.space)
 
   this.push(new Buffer(doc, 'utf8'))
   cb()
 }
 
 Stringify.prototype._flush = function (cb) {
-  if (this.destroyed)
-    return
-
-  if (!this.started)
-    this.push(this.open)
-
+  if (!this.started) this.push(this.open)
   this.push(this.close)
   this.push(null)
   cb()
-}
-
-Stringify.prototype.destroy = function () {
-  if (!this.destroyed) {
-    this.emit('close')
-    this.destroyed = true
-  }
 }
