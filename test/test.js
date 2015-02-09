@@ -105,4 +105,55 @@ describe('Streamify()', function () {
 
     stream.end(obj)
   })
+  it('should allow a space argument to JSON.stringify()', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    var stringify = Stringify({space:2})
+
+    var obj = {
+      a: 1
+    }
+
+    stream
+      .pipe(stringify)
+      .pipe(cat(function (err, buf) {
+        assert.ifError(err)
+        assert.equal(buf.toString('utf8'), '[\n' + JSON.stringify(obj, null, 2) + '\n]\n')
+
+        done()
+      }))
+
+    stream.end(obj)
+  })
+
+  it('should allow a space argument to JSON.stringify()', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    var replacer = function(key, value){
+      if(key === 'a') return undefined
+      return value
+    }
+
+    var stringify = Stringify({replacer:replacer})
+
+    var obj = {
+      a: 1
+    }
+
+    stream
+      .pipe(stringify)
+      .pipe(cat(function (err, buf) {
+        assert.ifError(err)
+        assert.equal(buf.toString('utf8'), '[\n' + JSON.stringify({}, null, 2) + '\n]\n')
+
+        done()
+      }))
+
+    stream.end(obj)
+  })
+
 })

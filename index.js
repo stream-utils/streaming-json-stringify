@@ -16,7 +16,12 @@ module.exports = Stringify
 function Stringify(options) {
   if (!(this instanceof Stringify))
     return new Stringify(options || {})
-
+  if (options && options.replacer) {
+    this.replacer = options.replacer;
+  }
+  if (options && options.space !== undefined) {
+    this.space = options.space;
+  }
   Transform.call(this, options || {})
   this._writableState.objectMode = true
 }
