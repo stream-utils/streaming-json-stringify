@@ -156,4 +156,46 @@ describe('Streamify()', function () {
     stream.end(obj)
   })
 
+  it('should allow custom openings and closings', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    var stringify = Stringify({open: "{\"test\": [\n", close: "\n]}\n"})
+
+    var obj = [{a: 1}]
+
+    stream
+      .pipe(stringify)
+      .pipe(cat(function (err, buf) {
+        assert.ifError(err)
+        assert.equal(buf.toString('utf8'), "{\"test\": [\n" + JSON.stringify(obj, null) + "\n]}\n")
+        
+        done()
+      }))
+
+    stream.end(obj)
+  })
+
+  it('should allow custom seperators', function (done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    var stringify = Stringify({seperator: ' , '})
+
+    stream
+      .pipe(stringify)
+      .pipe(cat(function (err, buf) {
+        assert.ifError(err)
+        assert.equal(buf.toString('utf8'), "[\n1 , 2 , 3\n]\n")
+        
+        done()
+      }))
+
+    stream.write(1)
+    stream.write(2)
+    stream.write(3)
+    stream.end()
+  })
 })

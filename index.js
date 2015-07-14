@@ -24,15 +24,20 @@ function Stringify(options) {
   }
   Transform.call(this, options || {})
   this._writableState.objectMode = true
+
+  // Array Deliminator defaults
+  var open = options && options.open ? options.open : '[\n'
+  var seperator = options && options.seperator ? options.seperator : '\n,\n'
+  var close = options && options.close ? options.close : '\n]\n'
+
+  // Array Deliminators
+  this.open = new Buffer(open, 'utf8')
+  this.seperator = new Buffer(seperator, 'utf8')
+  this.close = new Buffer(close, 'utf8')
 }
 
 // Flags
 Stringify.prototype.started = false
-
-// Array delimiters
-Stringify.prototype.open = new Buffer('[\n', 'utf8')
-Stringify.prototype.seperator = new Buffer('\n,\n', 'utf8')
-Stringify.prototype.close = new Buffer('\n]\n', 'utf8')
 
 // JSON.stringify options
 Stringify.prototype.replacer = null
