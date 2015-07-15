@@ -25,6 +25,6 @@
   ],
   "dependencies": {
     "json-stringify-safe": "5",
-    "readable-stream": "1"
+    "readable-stream": "2"
   }
 }
