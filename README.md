@@ -6,7 +6,6 @@
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
-[![Gittip][gittip-image]][gittip-url]
 
 Similar to [JSONStream.stringify()](https://github.com/dominictarr/JSONStream#jsonstreamstringifyopen-sep-close) except it is, by default, a binary stream, and it is a streams2 implementation.
 
@@ -78,5 +77,3 @@ stringify.space = 2
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/streaming-json-stringify.svg?style=flat-square
 [downloads-url]: https://npmjs.org/package/streaming-json-stringify
-[gittip-image]: https://img.shields.io/gratipay/jonathanong.svg?style=flat-square
-[gittip-url]: https://gratipay.com/jonathanong/
