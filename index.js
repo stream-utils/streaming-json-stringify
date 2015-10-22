@@ -26,14 +26,14 @@ function Stringify(options) {
   this._writableState.objectMode = true
 
   // Array Deliminator defaults
-  var open = options && options.open ? options.open : '[\n'
+  var opener = options && options.opener ? options.opener : '[\n'
   var seperator = options && options.seperator ? options.seperator : '\n,\n'
-  var close = options && options.close ? options.close : '\n]\n'
+  var closer = options && options.closer ? options.closer : '\n]\n'
 
   // Array Deliminators
-  this.open = new Buffer(open, 'utf8')
+  this.opener = new Buffer(opener, 'utf8')
   this.seperator = new Buffer(seperator, 'utf8')
-  this.close = new Buffer(close, 'utf8')
+  this.closer = new Buffer(closer, 'utf8')
 }
 
 // Flags
@@ -47,7 +47,7 @@ Stringify.prototype._transform = function (doc, enc, cb) {
   if (this.started) {
     this.push(this.seperator)
   } else {
-    this.push(this.open)
+    this.push(this.opener)
     this.started = true
   }
 
@@ -58,8 +58,8 @@ Stringify.prototype._transform = function (doc, enc, cb) {
 }
 
 Stringify.prototype._flush = function (cb) {
-  if (!this.started) this.push(this.open)
-  this.push(this.close)
+  if (!this.started) this.push(this.opener)
+  this.push(this.closer)
   this.push(null)
   cb()
 }

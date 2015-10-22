@@ -161,7 +161,7 @@ describe('Streamify()', function () {
       objectMode: true
     })
 
-    var stringify = Stringify({open: "{\"test\": [\n", close: "\n]}\n"})
+    var stringify = Stringify({opener: "{\"test\": [\n", closer: "\n]}\n"})
 
     var obj = [{a: 1}]
 

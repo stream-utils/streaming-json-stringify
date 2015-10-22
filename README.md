@@ -59,6 +59,9 @@ You can override these:
 var stringify = Stringify()
 stringify.replacer = function () {}
 stringify.space = 2
+stringify.opener = '['
+stringify.seperator = ','
+stringify.closer = ']'
 ```
 
 [gitter-image]: https://badges.gitter.im/stream-utils/streaming-json-stringify.png
