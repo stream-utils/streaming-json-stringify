@@ -25,15 +25,17 @@ function Stringify(options) {
   Transform.call(this, options || {})
   this._writableState.objectMode = true
 
-  // Array Deliminator defaults
+  // Array Deliminator and Stringifier defaults
   var opener = options && options.opener ? options.opener : '[\n'
   var seperator = options && options.seperator ? options.seperator : '\n,\n'
   var closer = options && options.closer ? options.closer : '\n]\n'
+  var stringifier = options && options.stringifier ? options.stringifier : stringify
 
-  // Array Deliminators
+  // Array Deliminators and Stringifier
   this.opener = new Buffer(opener, 'utf8')
   this.seperator = new Buffer(seperator, 'utf8')
   this.closer = new Buffer(closer, 'utf8')
+  this.stringifier = stringifier
 }
 
 // Flags
@@ -51,7 +53,7 @@ Stringify.prototype._transform = function (doc, enc, cb) {
     this.started = true
   }
 
-  doc = stringify(doc, this.replacer, this.space)
+  doc = this.stringifier(doc, this.replacer, this.space)
 
   this.push(new Buffer(doc, 'utf8'))
   cb()

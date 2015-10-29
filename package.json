@@ -6,9 +6,10 @@
   "repository": "stream-utils/streaming-json-stringify",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "2",
+    "cat-stream": "*",
     "istanbul": "0",
-    "cat-stream": "*"
+    "mocha": "2",
+    "sinon": "^1.17.2"
   },
   "scripts": {
     "test": "mocha --reporter spec",

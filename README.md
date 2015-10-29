@@ -44,6 +44,10 @@ will yield something like
 * Documents are separated by `'\n,\n'`.
 * The stream is terminated with `'\n]\n'`.
 
+## Stringifier
+
+By default, [json-stringify-safe](https://www.npmjs.com/package/json-stringify-safe) is used to convert objects into strings. This can be configured with `options.stringifier`.
+
 ## API
 
 ### Stringify([options])
@@ -62,6 +66,7 @@ stringify.space = 2
 stringify.opener = '['
 stringify.seperator = ','
 stringify.closer = ']'
+stringify.stringifier = JSON.stringify
 ```
 
 [gitter-image]: https://badges.gitter.im/stream-utils/streaming-json-stringify.png

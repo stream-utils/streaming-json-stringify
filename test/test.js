@@ -2,6 +2,7 @@
 var PassThrough = require('readable-stream/passthrough')
 var assert = require('assert')
 var cat = require('cat-stream')
+var sinon = require('sinon');
 
 var Stringify = require('..')
 
@@ -190,6 +191,31 @@ describe('Streamify()', function () {
         assert.ifError(err)
         assert.equal(buf.toString('utf8'), "[\n1 , 2 , 3\n]\n")
         
+        done()
+      }))
+
+    stream.write(1)
+    stream.write(2)
+    stream.write(3)
+    stream.end()
+  })
+
+  it('should allow custom stringifiers', function(done) {
+    var stream = new PassThrough({
+      objectMode: true
+    })
+
+    var stringifier = sinon.spy(JSON.stringify);
+
+    var stringify = Stringify({stringifier: stringifier})
+
+    stream
+      .pipe(stringify)
+      .pipe(cat(function (err, buf) {
+        assert.ifError(err)
+        assert.ok(stringifier.called)
+        assert.equal(buf.toString('utf8'), "[\n1\n,\n2\n,\n3\n]\n")
+
         done()
       }))
 
