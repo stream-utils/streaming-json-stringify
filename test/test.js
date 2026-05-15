@@ -178,12 +178,12 @@ describe('Streamify()', function () {
     stream.end(obj)
   })
 
-  it('should allow custom seperators', function (done) {
+  it('should allow custom separators', function (done) {
     var stream = new PassThrough({
       objectMode: true
     })
 
-    var stringify = Stringify({seperator: ' , '})
+    var stringify = Stringify({separator: ' , '})
 
     stream
       .pipe(stringify)

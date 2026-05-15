@@ -27,13 +27,13 @@ function Stringify(options) {
 
   // Array Deliminator and Stringifier defaults
   var opener = options && options.opener ? options.opener : '[\n'
-  var seperator = options && options.seperator ? options.seperator : '\n,\n'
+  var separator = options && options.separator ? options.separator : '\n,\n'
   var closer = options && options.closer ? options.closer : '\n]\n'
   var stringifier = options && options.stringifier ? options.stringifier : stringify
 
   // Array Deliminators and Stringifier
   this.opener = new Buffer(opener, 'utf8')
-  this.seperator = new Buffer(seperator, 'utf8')
+  this.separator = new Buffer(separator, 'utf8')
   this.closer = new Buffer(closer, 'utf8')
   this.stringifier = stringifier
 }
@@ -47,7 +47,7 @@ Stringify.prototype.space = 0
 
 Stringify.prototype._transform = function (doc, enc, cb) {
   if (this.started) {
-    this.push(this.seperator)
+    this.push(this.separator)
   } else {
     this.push(this.opener)
     this.started = true

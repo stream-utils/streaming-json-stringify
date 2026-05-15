@@ -64,7 +64,7 @@ var stringify = Stringify()
 stringify.replacer = function () {}
 stringify.space = 2
 stringify.opener = '['
-stringify.seperator = ','
+stringify.separator = ','
 stringify.closer = ']'
 stringify.stringifier = JSON.stringify
 ```
